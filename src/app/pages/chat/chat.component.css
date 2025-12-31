@@ -1,28 +1,38 @@
-
-.chat-messages {
-    display: flex;
-    flex-direction: column;
-    max-height: 800px;
-    overflow-y: scroll
+/* 1. Set the background for the entire page */
+main {
+  background-image: url('/assets/26318.jpg'); /* Ensure path to your image is correct */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* Keeps background still while scrolling */
+  min-height: 100vh;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
-.chat-message-left {
-    display: flex;
-    flex-shrink: 0;
-    margin-right: auto;
+/* 2. Make the chat container solid white */
+.card {
+  background-color: #ffffff !important; /* Force white background */
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); /* Adds depth against the dark background */
+  overflow: hidden;
 }
 
-.py-3 {
-    padding-top: 1rem!important;
-    padding-bottom: 1rem!important;
+/* 3. Ensure the title text is visible against the dark stars */
+h3 {
+  color: white;
+  font-weight: 600;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
-.px-4 {
-    padding-right: 1.5rem!important;
-    padding-left: 1.5rem!important;
+
+/* 4. Optional: Style the chat bubbles for better contrast */
+.chat-message-left .flex-shrink-1 {
+  background-color: #f1f3f5 !important; /* Light grey for incoming messages */
+  color: #333;
 }
-.flex-grow-0 {
-    flex-grow: 0!important;
-}
-.border-top {
-    border-top: 1px solid #dee2e6!important;
+
+/* 5. Keep the input area clean and white */
+form .border-top {
+  background-color: #ffffff;
+  border-top: 1px solid #dee2e6 !important;
 }
