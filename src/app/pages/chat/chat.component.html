@@ -1,6 +1,6 @@
 <main>
   <div class="container">
-    <h3 class="mb-3">Supa Chat <button (click)="logOut()" class="btn btn-secondary" style="float: right;">Log
+    <h3 class="mb-3">Welcome to a EMIR CHAT! <button (click)="logOut()" class="btn btn-secondary" style="float: right;">Log
         out</button>
     </h3>
     <div class="card">
@@ -13,8 +13,7 @@
             <div class="chat-messages p-4">
               <div class="chat-message-left pb-4">
                 <div class="me-5">
-                  <img src={{msg?.users?.avatar_url}} class="rounded-circle mr-1" alt="Sharon Doe" width="40"
-                    height="40">
+                  <img  [src]="msg?.users?.avatar_url" class="rounded-circle mr-1" [alt]="msg?.users?.full_name" width="40" height="40">
                   <div class="text-muted small text-nowrap mt-2">{{msg?.created_at | date: 'M/d/yy, h:mm a'}}</div>
                 </div>
                 <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
