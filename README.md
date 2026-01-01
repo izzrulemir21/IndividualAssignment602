@@ -1,76 +1,22 @@
-<!-- ## Database Table Schema -->
-## users table
+FULL NAME : MOHAMAD IZZRUL EMIR BIN MD SHAFIAN
+STUDENT ID : 2024236368
+LECTURER'S NAME : MUHAMMAD ATIF BIN RAMLAN
 
-* id (uuid)
-* full_name (text)
-* avatar_url (text)
+Project Background
 
-## Creating a users table
+Real-time communication is essential in today’s digital world for both personal and professional purposes. This project focuses on developing a real-time chat application using Angular 20 for the frontend and Supabase for the backend. Angular provides a scalable framework for building responsive interfaces, while Supabase offers authentication, database management, and real-time data features.
 
-```sql
-CREATE TABLE public.users (
-   id uuid not null references auth.users on delete cascade,
-   full_name text NULL,
-   avatar_url text NULL,
-   primary key (id)
-);
-```
+Users can log in via Google OAuth 2.0 and send or receive messages instantly, with updates reflected in real time. The application also uses security measures like Row Level Security (RLS) and Angular route guards to ensure data privacy and controlled access.
 
-## Enable Row Level Security
+This project demonstrates the integration of modern web technologies to build interactive, secure, and responsive applications, providing practical experience in full-stack development.
 
-```sql
-ALTER TABLE public.users ENABLE ROW LEVEL SECURITY;
-```
-
-## Permit Users Access Their Profile
-
-```sql
-CREATE POLICY "Permit Users to Access Their Profile"
-  ON public.users
-  FOR SELECT
-  USING ( auth.uid() = id );
-```
-
-## Permit Users to Update Their Profile
-
-```sql
-CREATE POLICY "Permit Users to Update Their Profile"
-  ON public.users
-  FOR UPDATE
-  USING ( auth.uid() = id );
-```
-
-## Supabase Functions
-
-```sql
-CREATE
-OR REPLACE FUNCTION public.user_profile() RETURNS TRIGGER AS $$ BEGIN INSERT INTO public.users (id, full_name,avatar_url)
-VALUES
-  (
-    NEW.id,
-    NEW.raw_user_meta_data ->> 'full_name'::TEXT,
-    NEW.raw_user_meta_data ->> 'avatar_url'::TEXT,
-  );
-RETURN NEW;
-END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
-```
-
-## Supabase Trigger
-
-```sql
-  CREATE TRIGGER
-  create_user_trigger
-  AFTER INSERT ON auth.users
-  FOR EACH ROW
-  EXECUTE PROCEDURE
-    public.user_profile();
-```
-
-## Chat_Messages table (Real Time)
-
-* id (uuid)
-* Created At (date)
-* text (text)
-* editable (boolean)
-* sender (uuid)
+DISCUSSION
+In the . article How to Build a Realtime Chat Application with Angular 20 and Supabase, I learned how modern web technologies can be used together to build a complete real‑time chat app from scratch. The tutorial walks step‑by‑step through the entire stack, combining frontend Angular development, backend database design with Supabase, and authentication via Google OAuth 2.0. Along the way, it exposes not just implementation details but also architectural considerations that are important when building real‑time applications. 
+One of the first lessons was the importance of setting up the right environment. Before any code is written, you need Node.js, npm, Angular CLI, and a Supabase account configured. It emphasizes installing and verifying these tools so the project scaffolding and subsequent features run smoothly. I learned that Angular CLI is essential for generating components and services quickly, while Bootstrap 5 simplifies building a responsive UI. 
+The tutorial then goes into UI design, where it uses Bootstrap icons and simple HTML to create a login page and chat screen. At first, this may seem basic, but I realized how important the UI is for usability ,even simple layouts made with Bootstrap can give users a professional experience. It also highlighted how Angular’s component structure (creating chat and login components) organizes a project in a scalable way. 
+A major learning point was integrating Google OAuth 2.0 for authentication. The tutorial explains how to configure OAuth credentials in the Google Cloud Console and connect that with Supabase’s authentication settings. This process was educational because it showed how third‑party identity providers can interface with backend BaaS platforms like Supabase. I learned about callback URLs, client IDs, and client secrets, essential concepts in secure login workflows. 
+Setting up routing and route protection in Angular was another challenge. Using CanActivate guards enabled me to restrict access to the chat page until the user is authenticated. This practice of guarding routes is critical in real apps to prevent unauthorized access. In the tutorial, this was done programmatically with Angular’s routing module. 
+On the backend, I learned to create the Supabase database schema for storing chat messages and user profiles. This included creating tables, defining columns, setting foreign key relations, and enabling Row Level Security (RLS) policies. Learning RLS gave me practical exposure to database security ,ensuring that users can only access or modify data they own. 
+Another challenging part was implementing Supabase functions and triggers. These server‑side elements automatically generate related user profile data and streamline database operations. Understanding triggers helped me see how backend logic can run independently of the frontend, which is good practice for efficiency. 
+Finally, tying it all together, I integrated Supabase realtime capabilities to fetch and display chat messages as they occur. This part was especially enlightening because real‑time applications must manage asynchronous updates, state management, and UI responsiveness. I also added logout functionality, giving users a complete session flow. 
+Overall, the tutorial taught me not just how to build a real‑time chat app, but also gave me insight into modern full‑stack development practices ,from frontend to backend and from authentication to realtime data syncing. Each step had its own challenges, but tackling them gave me confidence in using Angular and Supabase together for real‑world applications.
